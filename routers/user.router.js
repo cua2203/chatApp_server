@@ -6,11 +6,10 @@ const authenticateToken = require('../middlewares/auth.middleware')
 userRouter.post('/register',registerUser)
 userRouter.post('/login',loginUser)
 userRouter.get('/check_auth',checkAuthenticated)
+userRouter.get('/logout',logOut);
 userRouter.get('/:id',authenticateToken,findUser)
 userRouter.get('/permission/:id',getUserPermission)
 userRouter.get('/',authenticateToken,getUser)
-
-userRouter.get('/logout',logOut);
 
 
 module.exports = userRouter;

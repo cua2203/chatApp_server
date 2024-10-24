@@ -103,7 +103,7 @@ app.get('/test', (req, res) => {
     console.log('test ....');
     let result = userModel.find();
     console.log('result: ', result);
-    // Kiểm tra xem token có tồn tại hay không
+   
     res.json({ message:'test success !',result: result});
 
   }
