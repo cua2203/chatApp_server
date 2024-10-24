@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'http://localhost:4200', // URL frontend của bạn
+  origin: ['http://localhost:4200','http://14.225.212.180'],// URL frontend của bạn
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Các phương thức được phép
   allowedHeaders: ['Content-Type', 'Authorization'], // Các headers được phép
   credentials: true, // Cho phép cookie trong yêu cầu
