@@ -98,11 +98,12 @@ app.get(
   }
 );
 
-app.get("/logout", (req, res) => {
-  req.logout(() => {
-    res.redirect("/");
-  });
-});
+app.get('/test', (req, res) => {
+  console.log('test ....');
+  res.json({ message:'test success !' });
+})
+
+
 
 const port = process.env.PORT;
 
