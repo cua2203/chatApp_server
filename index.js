@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 const corsOptions = {
-  origin: ['http://localhost:4200','http://14.225.212.180:80'],// URL frontend của bạn
+  origin: ['http://localhost:4200','http://14.225.212.180'],// URL frontend của bạn
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Các phương thức được phép
   allowedHeaders: ['Content-Type', 'Authorization'], // Các headers được phép
   credentials: true, // Cho phép cookie trong yêu cầu
@@ -40,7 +40,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: `${process.env.SERVER_DOMAIN}/auth/google/callback`,
     },
     function (accessToken, refreshToken, profile, done) {
       // Có thể lưu trữ thông tin người dùng vào database tại đây
@@ -94,13 +94,24 @@ app.get(
  //   secure: process.env.NODE_ENV === "production", // Chỉ dùng cho môi trư��ng production
       sameSite: "Strict",
     });
-    res.redirect("http://localhost:4200/");
+    res.redirect(`${process.env.CLIENT_DOMAIN}`);
   }
 );
 
 app.get('/test', (req, res) => {
-  console.log('test ....');
-  res.json({ message:'test success !' });
+  try{
+    console.log('test ....');
+    let result = userModel.find();
+    console.log('result: ', result);
+    // Kiểm tra xem token có tồn tại hay không
+    res.json({ message:'test success !',result: result});
+
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+ 
 })
 
 
